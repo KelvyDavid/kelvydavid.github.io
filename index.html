@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
         <div class="container">
             <a class="navbar-brand" href="#">Kelvy David Tomala Cimarra</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menú de navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
@@ -33,15 +33,17 @@
     <header class="hero position-relative d-flex align-items-center text-white text-center">
         <div id="particles-js"></div>
         <div class="container position-relative">
-            <img src="..\Avatar\kelvyd.png" alt="Avatar" class="img-fluid mb-4" style="max-height: 250px"/>
+            <img src="..\Avatar\kelvyd.png" alt="Avatar" class="img-fluid mb-4 avatar-img"/>
             <h1 class="display-4">Hola, soy Kelvy</h1>
-            <p class="lead">Ingeniero Electromecánico & TI | Soluciones Técnicas y Digitales</p>
+            <p class="lead">
+                Ingeniero Electromecánico & TI | Soluciones Técnicas y Digitales
+            </p>
             <div class="social-icons mt-4">
-                <a href="https://www.linkedin.com/in/davidkelvy" target="_blank" class="text-white me-3 fs-4"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/KelvyDavid" target="_blank" class="text-white me-3 fs-4"><i class="fab fa-github"></i></a>
-                <a href="https://twitter.com/KelvyTomala" target="_blank" class="text-white me-3 fs-4"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com/kelvydavid_kd" target="_blank" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com/@kelvydavid_kd" target="_blank" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener" class="text-white me-3 fs-4"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/KelvyDavid" target="_blank" rel="noopener" class="text-white me-3 fs-4"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/KelvyTomala" target="_blank" rel="noopener" class="text-white me-3 fs-4"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/kelvydavid_kd" target="_blank" rel="noopener" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@kelvydavid_kd" target="_blank" rel="noopener" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
             </div>
             <a href="#proyectos" class="btn btn-outline-light mt-3">Ver Proyectos</a>
         </div>
@@ -63,49 +65,53 @@
     <!-- Proyectos -->
     <section id="proyectos" class="py-5">
         <div class="container">
-        <h2 class="mb-4 text-white">Proyectos destacados</h2>
-        <div class="row g-4">
-            <!-- Proyecto 1 -->
-            <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body">
-                <h5 class="card-title">Sistema de monitoreo IoT</h5>
-                <p class="card-text">Diseño de sistema basado en microcontroladores para monitoreo remoto de variables industriales con interfaz web.</p>
+            <h2 class="mb-4 text-white">Proyectos destacados</h2>
+            <div class="row g-4">
+                <!-- Proyecto 1 -->
+                <div class="col-md-6">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Sistema de monitoreo IoT</h5>
+                            <p class="card-text">
+                                Diseño de sistema basado en microcontroladores para monitoreo remoto de variables industriales con interfaz web.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Proyecto 2 -->
+                <div class="col-md-6">
+                    <div class="card shadow">
+                        <div class="card-body">
+                        <h5 class="card-title">Plataforma web de gestión</h5>
+                        <p class="card-text">
+                            Desarrollo fullstack de una plataforma para gestión de activos y mantenimiento preventivo con dashboard interactivo.
+                        </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            <!-- Proyecto 2 -->
-            <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body">
-                <h5 class="card-title">Plataforma web de gestión</h5>
-                <p class="card-text">Desarrollo fullstack de una plataforma para gestión de activos y mantenimiento preventivo con dashboard interactivo.</p>
-                </div>
-            </div>
-            </div>
-        </div>
         </div>
     </section>
 
     <!-- Contacto -->
     <section id="contacto" class="py-5 bg-light">
         <div class="container">
-        <h2 class="mb-4">Contacto</h2>
-        <form>
-            <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" required />
-            </div>
-            <div class="mb-3">
-            <label for="email" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="email" required />
-            </div>
-            <div class="mb-3">
-            <label for="mensaje" class="form-label">Mensaje</label>
-            <textarea class="form-control" id="mensaje" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
+            <h2 class="mb-4">Contacto</h2>
+            <form action="https://formspree.io/f/mblolgnv" method="POST">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" name="email" required />
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
         </div>
     </section>
 
