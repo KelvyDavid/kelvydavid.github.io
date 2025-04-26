@@ -1,0 +1,46 @@
+body { 
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    background-color: #0f2027; /* fallback */
+    overflow: hidden;
+}
+
+.hero .container {
+    z-index: 1;
+    position: relative;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+section {
+    scroll-margin-top: 60px;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+.social-icons a {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #0dcaf0; /* Celeste Bootstrap, puedes cambiarlo */
+}
