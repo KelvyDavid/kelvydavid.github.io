@@ -5,8 +5,7 @@ body {
 .hero {
     position: relative;
     height: 100vh;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    background-color: #0f2027; /* fallback */
+    background-color: #ffffff; /* fallback */
     overflow: hidden;
 }
 
