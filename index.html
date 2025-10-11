@@ -1520,25 +1520,26 @@
         }
 
         function downloadCV(language) {
-            // URLs de tus CVs en GitHub Pages
-            // Reemplaza 'TU-USUARIO' con tu nombre de usuario de GitHub
-            // Si tu repositorio se llama 'portfolio', la URL será: https://TU-USUARIO.github.io/portfolio/
-            // Si tu repositorio se llama 'TU-USUARIO.github.io', la URL será: https://TU-USUARIO.github.io/
-            
-            const baseUrl = 'https://TU-USUARIO.github.io/TU-REPOSITORIO';
+            const baseUrl = 'https://kelvydavid.github.io/main';
             
             const cvUrls = {
-                'es': `${baseUrl}/cv/CV_David_Tomala_ES.pdf`,
-                'en': `${baseUrl}/cv/CV_David_Tomala_EN.pdf`,
-                'de': `${baseUrl}/cv/CV_David_Tomala_DE.pdf`,
-                'fr': `${baseUrl}/cv/CV_David_Tomala_FR.pdf`,
-                'pt': `${baseUrl}/cv/CV_David_Tomala_PT.pdf`,
-                'it': `${baseUrl}/cv/CV_David_Tomala_IT.pdf`
+                'es': `${baseUrl}/CVs/CV_David_Tomala_ES.pdf`,
+                'en': `${baseUrl}/CVs/CV_David_Tomala_EN.pdf`,
+                'de': `${baseUrl}/CVs/CV_David_Tomala_DE.pdf`,
+                'fr': `${baseUrl}/CVs/CV_David_Tomala_FR.pdf`,
+                'pt': `${baseUrl}/CVs/CV_David_Tomala_PT.pdf`,
+                'it': `${baseUrl}/CVs/CV_David_Tomala_IT.pdf`
             };
+
+            const url = cvUrls[language];
             
             // Abrir el PDF en una nueva pestaña
-            if (cvUrls[language]) {
-                window.open(cvUrls[language], '_blank');
+            if (url) {
+                // Abrir PDF en nueva pestaña de manera segura
+                const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+                if (!newWindow) {
+                    alert('No se pudo abrir el CV. Por favor, permita ventanas emergentes en su navegador.');
+                }
             } else {
                 alert('CV no disponible en este idioma.');
             }
