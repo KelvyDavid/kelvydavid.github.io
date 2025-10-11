@@ -31,7 +31,8 @@ body {
     right: 2rem;
     z-index: 999;
     background: rgba(15, 20, 45, 0.95);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari y iOS */
+    backdrop-filter: blur(10px);         /* Otros navegadores */
     padding: 0.5rem;
     border-radius: 10px;
     border: 1px solid rgba(0, 217, 255, 0.3);
@@ -64,7 +65,8 @@ nav {
     top: 0;
     width: 100%;
     background: rgba(10, 14, 39, 0.95);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari y iOS */
+    backdrop-filter: blur(10px);         /* Otros navegadores */
     padding: 1rem 2rem;
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 217, 255, 0.2);
@@ -308,7 +310,8 @@ section {
     margin: 6rem 0;
     padding: 3rem 2rem;
     background: rgba(15, 20, 45, 0.6);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari y iOS */
+    backdrop-filter: blur(10px);         /* Otros navegadores */
     border-radius: 15px;
     border: 1px solid rgba(0, 217, 255, 0.1);
     position: relative;
@@ -354,6 +357,23 @@ h2::after {
     font-size: 1.1rem;
     color: #c0c0c0;
     text-align: justify;
+}
+
+.profile-text-m1 {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #c0c0c0;
+    text-align: justify;
+    margin-top: 1rem;
+}
+
+.profile-text-m2 {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #c0c0c0;
+    text-align: justify;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .education-item, .experience-item {
