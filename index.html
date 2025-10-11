@@ -1,278 +1,543 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portafolio de David Kelvy Tomala Cimarra - Ingeniería Electromecánica y Tecnologías de la Información.">
-    <title>Portafolio David Kelvy Tomala Cimarra</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Kelvy Tomala Cimarra - Ingeniero Electromecánico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 50px, #00d9ff 50px, #00d9ff 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, #00d9ff 50px, #00d9ff 51px);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d9ff, #0080ff);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .glitch {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d9ff 0%, #0080ff 50%, #00d9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 128, 255, 0.1));
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            margin: 0.5rem;
+        }
+
+        section {
+            margin: 6rem 0;
+            padding: 3rem 2rem;
+            background: rgba(15, 20, 45, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d9ff, transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #00d9ff;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #00d9ff, #0080ff);
+        }
+
+        .profile-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #c0c0c0;
+            text-align: justify;
+        }
+
+        .education-item, .experience-item {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 217, 255, 0.03);
+            border-left: 3px solid #00d9ff;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .education-item:hover, .experience-item:hover {
+            background: rgba(0, 217, 255, 0.08);
+            transform: translateX(10px);
+        }
+
+        .education-item h3, .experience-item h3 {
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item p, .experience-item p {
+            color: #a0a0a0;
+            margin: 0.3rem 0;
+        }
+
+        .experience-item ul {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+            color: #c0c0c0;
+        }
+
+        .experience-item li {
+            margin: 0.5rem 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(0, 128, 255, 0.05));
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+            transform: translate(-25%, -25%);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d9ff;
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .skill-card h4 {
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .training-item {
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.03);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .training-item:hover {
+            background: rgba(0, 217, 255, 0.08);
+            border-color: rgba(0, 217, 255, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 14, 39, 0.95);
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+            margin-top: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #00d9ff;
+        }
+
+        @media (max-width: 768px) {
+            .glitch {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow" style="background-color: #0A192F;">
-        <div class="container">
-            <a class="navbar-brand" href="#">Portafolio Personal</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Menú de navegación">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#sobre-mi">About me</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#proyectos">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacts</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="circuit-bg"></div>
+    
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#perfil">Perfil</a></li>
+            <li><a href="#educacion">Educación</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#capacitacion">Capacitación</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero position-relative d-flex align-items-center text-dark text-center ">
-        <div id="particles-js"></div>
-        <div class="container position-relative">
-            <img src="..\Avatar\kelvyd.png" alt="Avatar" class="img-fluid mb-4 avatar-img"/>
-            <h1 class="display-4">Hi there!, I'm Kelvy</h1>
-            <p class="lead">
-                Electromechanical Engineer & IT | Technical and Digital Solutions
-            </p>
-            <p>Designing solutions that connect the physical and digital worlds</p>
-            <div class="social-icons mt-4">
-                <a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener" class="text-dark me-3 fs-4"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/KelvyDavid" target="_blank" rel="noopener" class="text-dark me-3 fs-4"><i class="fab fa-github"></i></a>
-                <a href="https://twitter.com/KelvyTomala" target="_blank" rel="noopener" class="text-dark me-3 fs-4"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com/kelvydavid_kd" target="_blank" rel="noopener" class="text-dark me-3 fs-4"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com/@kelvydavid_kd" target="_blank" rel="noopener" class="text-dark fs-4"><i class="fab fa-youtube"></i></a>
+    <header id="inicio">
+        <div class="container hero-content">
+            <h1 class="glitch">DAVID KELVY TOMALA CIMARRA</h1>
+            <p class="subtitle">Ingeniero Electromecánico | Especialista en TI & GIS</p>
+            <div>
+                <span class="ai-badge">⚡ Sistemas Eléctricos</span>
+                <span class="ai-badge">🤖 Automatización</span>
+                <span class="ai-badge">🗺️ Sistemas GIS</span>
+                <span class="ai-badge">💻 Tecnología de la Información</span>
             </div>
-            <a href="#proyectos" class="btn btn-outline-dark mt-3">View Projects</a>
         </div>
     </header>
 
-    <!-- Sobre mí -->
-    <section id="sobre-mi" class="py-5 bg-light">
-        <div class="container">
-                <h2 class="mb-4">About me</h2>
-                <p>
-                    I am an Electromechanical Engineer with experience in the design and construction of distribution grids, 
-                    as well as the implementation of Geographic Information Systems (GIS). My background in Information 
-                    Technology Engineering allows me to integrate innovative solutions to optimize processes and efficiently 
-                    manage technological infrastructures. I am characterized by a proactive approach, always seeking continuous 
-                    improvement with a strong passion for technology. My goal is to continue developing technical and management 
-                    skills in multidisciplinary projects, contributing to the growth of organizations. I am committed to constant 
-                    learning and implementing high-impact solutions.
-                </p>
-        </div>
-    </section>
-
-    <!-- Experiencia -->
-    <section id="Experiencia" class="py-5">
-        <div class="container">
-            <h2 class="mb-4 text-dark">Featured Experience</h2>
-            <div class="row g-4">
-                <!-- Experiencia 1 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">GIS Professional</h5>
-                            <p class="card-text">
-                                Update, validation, and automation of data quality processes in GIS systems.
-                                Creation of thematic maps for energy projects.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Experiencia 2 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                        <h5 class="card-title">Project Engineer</h5>
-                        <p class="card-text">
-                            Management, supervision, and engineering of electrical distribution and industrial automation projects.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Experiencia 3 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                        <h5 class="card-title">Project Assistant </h5>
-                        <p class="card-text">
-                            Engineering of electrical distribution projects and conventional and remote metering systems.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Experiencia 4 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                        <h5 class="card-title">Electromechanical Technician </h5>
-                        <p class="card-text">
-                            Engineering of control, automation, and electrical distribution projects.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Proyectos -->
-    <section id="proyectos" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="mb-4 text-dark">Featured Projects</h2>
-            <div class="row g-4">
-                <!-- Proyecto 1 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Consulting services for updating information in SIG platform.</h5>
-                            <p class="card-text">
-                                Led the update, validation, and automation of data quality processes within Geographic Information Systems (GIS), 
-                                enhancing the reliability and consistency of spatial data for energy-related projects. Developed thematic maps to 
-                                support project planning and decision-making. Utilized tools such as ArcGIS, QGIS, and spatial databases, 
-                                integrating automated workflows to streamline data handling. These efforts resulted in improved geospatial 
-                                data management efficiency and a significant reduction in manual errors.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Proyecto 2 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                        <h5 class="card-title">Mnnto grids, technical inspection services of operation and maintenaince.</h5>
-                        <p class="card-text">
-                            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Proyecto 3 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                        <h5 class="card-title">Definitive studies and designs for the construction of the '3 de julio' boulevard.</h5>
-                        <p class="card-text">
-                            Developed engineering designs for electrical distribution projects and both conventional and advanced metering infrastructure (AMI) systems. 
-                            Collected technical field data to support distribution grid planning and implementation. 
-                            Utilized Geographic Information Systems (GIS), electrical CAD tools, and field surveying techniques to support accurate and efficient project development. 
-                            These efforts contributed to the optimization of energy infrastructure projects and streamlined the planning and technical documentation processes.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Proyecto 4 -->
-                <div class="col-md-6">
-                    <div class="card shadow">
-                        <div class="card-body">
-                        <h5 class="card-title">Design and assembly of electrical control panels for the bottling companies and the agricultural food processing companies</h5>
-                        <p class="card-text">
-                            Engineered control, automation, and electrical distribution projects, focusing on the design and implementation of efficient and reliable systems. 
-                            Applied industrial automation technologies, including PLCs and electrical design tools, to optimize operational workflows. 
-                            These contributions enabled the automation of key processes and improved the overall efficiency and performance of electrical infrastructure projects.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- Habilidades -->
-<section id="habilidades" class="py-5">
     <div class="container">
-        <div class="max-w-xl mx-auto p-6 space-y-8">
-            <!-- Skill Bars -->
-            <div>
-                <h2 class="mb-4 text-dark">Skills</h2>
-                
-                <div class="mb-4">
-                    <div class="flex justify-between mb-1">
-                    <span><i class="fas fa-map-marked-alt text-blue-600 mr-2"></i>GIS (ArcGIS/QGIS)</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div class="bg-blue-600 h-3 rounded-full" style="width: 90%;"></div>
-                    </div>
-                </div>
+        <section id="perfil">
+            <h2>Perfil Profesional</h2>
+            <p class="profile-text">
+                Ingeniero Electromecánico con experiencia en diseño y construcción de redes de distribución, 
+                así como la implementación de sistemas de información geográfica (SIG). Mi formación técnica 
+                se complementa con estudios en Ingeniería en Tecnologías de la Información, lo que me permite 
+                integrar soluciones innovadoras en la gestión de infraestructuras y sistemas tecnológicos.
+            </p>
+            <p class="profile-text" style="margin-top: 1rem;">
+                Mi perfil profesional se caracteriza por una constante búsqueda de mejora y optimización de 
+                procesos, apoyado en un enfoque proactivo y con pasión por la tecnología. Mi objetivo es 
+                continuar desarrollando habilidades técnicas y de gestión en proyectos multidisciplinarios, 
+                contribuyendo al crecimiento de las organizaciones a través de la implementación de soluciones 
+                eficientes y de alto impacto, mientras amplío mis conocimientos en áreas emergentes de la 
+                ingeniería y la tecnología.
+            </p>
+        </section>
+
+        <section id="educacion">
+            <h2>Educación</h2>
+            <div class="education-item">
+                <h3>Ingeniería Electromecánica</h3>
+                <p><strong>Universidad UTE</strong> | Junio 2019</p>
+                <p>Reg. SENESCYT No. 1032-2019-2094258</p>
+            </div>
+            <div class="education-item">
+                <h3>Ingeniería en Tecnología de la Información</h3>
+                <p><strong>UNEMI</strong> | En Curso</p>
+                <p>Quinto semestre</p>
+            </div>
+            <div class="education-item">
+                <h3>Certificación en Prevención de Riesgos Laborales: Energía Eléctrica</h3>
+                <p><strong>GRUPOGESTIONA S.A.</strong> | Septiembre 2022</p>
+                <p>Reg. SETEC No. MDT-480-CCL-368184</p>
+            </div>
+        </section>
+
+        <section id="experiencia">
+            <h2>Experiencia Profesional</h2>
             
-                <div class="mb-4">
-                    <div class="flex justify-between mb-1">
-                    <span><i class="fas fa-bolt text-yellow-500 mr-2"></i>Electrical Design</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div class="bg-yellow-500 h-3 rounded-full" style="width: 80%;"></div>
-                    </div>
+            <div class="experience-item">
+                <h3>Profesional GIS</h3>
+                <p><strong>Villavicencio CE</strong> | Julio 2024 - Presente</p>
+                <ul>
+                    <li>Actualización y Validación de Calidad de Datos de Sistemas de Información Geográfica (SIG)</li>
+                    <li>Automatización de procesos SIG</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Ingeniero Electromecánico</h3>
+                <p><strong>SMART ENERGY</strong> | Junio 2018 - Presente</p>
+                <ul>
+                    <li>Administración, supervisión e Ingeniería de proyectos eléctricos (Redes de Distribución)</li>
+                    <li>Ingeniería de proyectos de control y automatización</li>
+                    <li>Actualización y Validación de Calidad de Datos de Sistemas de Información Geográfica (SIG)</li>
+                    <li>Automatización de procesos SIG</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Profesional GIS</h3>
+                <p><strong>BLUE LINE ENERGY</strong> | Octubre 2019 - Septiembre 2021</p>
+                <ul>
+                    <li>Actualización de Sistemas de Información Geográfica (SIG)</li>
+                    <li>Elaboración de mapas temáticos</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Asistente/Digitador</h3>
+                <p><strong>INSELECTRIC</strong> | Julio 2017 - Febrero 2018</p>
+                <ul>
+                    <li>Ingeniería de proyectos eléctricos (Redes de Distribución)</li>
+                    <li>Levantamiento de información para proyectos eléctricos</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Asistente de Proyectos</h3>
+                <p><strong>SD ENERGÍA</strong> | Abril 2016 - Diciembre 2016</p>
+                <ul>
+                    <li>Ingeniería de proyectos eléctricos (Redes de Distribución Aérea y Subterránea)</li>
+                    <li>Sistemas de medición convencionales y tele-medición</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Técnico Electromecánico</h3>
+                <p><strong>R ELECTRIC</strong> | Agosto 2014 - Marzo 2017</p>
+                <ul>
+                    <li>Ingeniería de proyectos de control y automatización</li>
+                    <li>Ingeniería de proyectos eléctricos</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="habilidades">
+            <h2>Aptitudes y Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>💻 Software & Tecnología</h4>
+                    <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
                 </div>
-            
-                <div class="mb-4">
-                    <div class="flex justify-between mb-1">
-                    <span><i class="fas fa-cogs text-green-600 mr-2"></i>Industrial Automation</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div class="bg-green-600 h-3 rounded-full" style="width: 75%;"></div>
-                    </div>
+                <div class="skill-card">
+                    <h4>🔌 Ingeniería Eléctrica</h4>
+                    <p>Redes de distribución, Diseño de iluminación, Prevención de riesgos eléctricos</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🗺️ Sistemas GIS</h4>
+                    <p>Información geográfica, Administración de base de datos, Mapas temáticos</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🤖 Automatización</h4>
+                    <p>Programación HMI, PLC, Variadores, Control industrial, Domótica</p>
+                </div>
+                <div class="skill-card">
+                    <h4>👨‍💻 Programación</h4>
+                    <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                </div>
+                <div class="skill-card">
+                    <h4>📊 Gestión</h4>
+                    <p>Proyectos electromecánicos, Mantenimiento industrial, Liderazgo, Trabajo en equipo</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🌐 Idiomas</h4>
+                    <p>Español (Nativo), Inglés</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🔧 Análisis</h4>
+                    <p>Resolución de problemas, Optimización de procesos</p>
                 </div>
             </div>
-            
-                <!-- Badges -->
-                <div>
-                <h2 class="text-2xl font-bold mb-4">Technologies</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
-                    <i class="fas fa-database mr-2"></i> PostgreSQL/PostGIS
-                    </span>
-                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm flex items-center">
-                    <i class="fas fa-drafting-compass mr-2"></i> AutoCAD Electrical
-                    </span>
-                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm flex items-center">
-                    <i class="fas fa-microchip mr-2"></i> PLC Programming
-                    </span>
-                    <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm flex items-center">
-                    <i class="fas fa-sitemap mr-2"></i> AMI Systems
-                    </span>
+        </section>
+
+        <section id="capacitacion">
+            <h2>Capacitación Continua</h2>
+            <div class="training-grid">
+                <div class="training-item">
+                    <strong>Programación de Pantallas HMI-KINCO</strong>
+                    <p>Octubre 2022 | 40 horas</p>
                 </div>
+                <div class="training-item">
+                    <strong>Control Eléctrico y Automatización Industrial</strong>
+                    <p>Noviembre 2018 | 40 horas</p>
                 </div>
-        </div>
+                <div class="training-item">
+                    <strong>Compras Públicas Dirigido a Proveedores</strong>
+                    <p>Septiembre 2018 | 40 horas</p>
+                </div>
+                <div class="training-item">
+                    <strong>Sistemas de Información Geográfica y el Uso de ArcGIS</strong>
+                    <p>Abril 2018 | 40 horas</p>
+                </div>
+                <div class="training-item">
+                    <strong>Gestión del Mantenimiento Industrial</strong>
+                    <p>Marzo 2018 | 40 horas</p>
+                </div>
+                <div class="training-item">
+                    <strong>Prevención de Riesgos Eléctricos</strong>
+                    <p>Enero 2018 | 40 horas</p>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="mb-4">Contacto</h2>
-            <form action="https://formspree.io/f/mblolgnv" method="POST">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required />
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="email" name="email" required />
-                </div>
-                <div class="mb-3">
-                    <label for="mensaje" class="form-label">Mensaje</label>
-                    <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
+    <footer>
+        <p>&copy; 2025 David Kelvy Tomala Cimarra - Ingeniero Electromecánico</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📍</span> Quito, Ecuador
+            </div>
+            <div class="contact-item">
+                <span class="pulse">⚡</span> Disponible para proyectos
+            </div>
         </div>
-    </section>
-
-    <footer class="bg-dark text-white text-center py-3">
-        © 2025 Kelvy David Tomala Cimarra | Portafolio Personal
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.0.4/tsparticles.bundle.min.js"></script>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="interactions.js"></script>
-    <script>
-        console.log("Script activo");
-        console.log("tsParticles:", tsParticles);
-    </script>
-    </body>
-    </html>
+</body>
+</html>
