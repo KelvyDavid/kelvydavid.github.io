@@ -4,529 +4,1461 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David Kelvy Tomala Cimarra - Ingeniero Electromecánico</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0e27;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-
-        .circuit-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.03;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 50px, #00d9ff 50px, #00d9ff 51px),
-                repeating-linear-gradient(90deg, transparent, transparent 50px, #00d9ff 50px, #00d9ff 51px);
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00d9ff, #0080ff);
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        header {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .glitch {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00d9ff 0%, #0080ff 50%, #00d9ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.3); }
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: #a0a0a0;
-            margin-bottom: 2rem;
-        }
-
-        .ai-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 128, 255, 0.1));
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 25px;
-            font-size: 0.9rem;
-            margin: 0.5rem;
-        }
-
-        section {
-            margin: 6rem 0;
-            padding: 3rem 2rem;
-            background: rgba(15, 20, 45, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00d9ff, transparent);
-            animation: scan 3s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #00d9ff;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #00d9ff, #0080ff);
-        }
-
-        .profile-text {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            color: #c0c0c0;
-            text-align: justify;
-        }
-
-        .education-item, .experience-item {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: rgba(0, 217, 255, 0.03);
-            border-left: 3px solid #00d9ff;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .education-item:hover, .experience-item:hover {
-            background: rgba(0, 217, 255, 0.08);
-            transform: translateX(10px);
-        }
-
-        .education-item h3, .experience-item h3 {
-            color: #00d9ff;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-item p, .experience-item p {
-            color: #a0a0a0;
-            margin: 0.3rem 0;
-        }
-
-        .experience-item ul {
-            margin-top: 1rem;
-            margin-left: 1.5rem;
-            color: #c0c0c0;
-        }
-
-        .experience-item li {
-            margin: 0.5rem 0;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(0, 128, 255, 0.05));
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            border-radius: 10px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
-            transition: all 0.5s;
-            opacity: 0;
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
-            transform: translate(-25%, -25%);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            border-color: #00d9ff;
-            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.3);
-        }
-
-        .skill-card h4 {
-            color: #00d9ff;
-            margin-bottom: 0.5rem;
-        }
-
-        .training-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .training-item {
-            padding: 1rem;
-            background: rgba(0, 217, 255, 0.03);
-            border: 1px solid rgba(0, 217, 255, 0.1);
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .training-item:hover {
-            background: rgba(0, 217, 255, 0.08);
-            border-color: rgba(0, 217, 255, 0.3);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(10, 14, 39, 0.95);
-            border-top: 1px solid rgba(0, 217, 255, 0.2);
-            margin-top: 4rem;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #00d9ff;
-        }
-
-        @media (max-width: 768px) {
-            .glitch {
-                font-size: 2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="circuit-bg"></div>
+
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="pt">🇧🇷 Português</option>
+            <option value="it">🇮🇹 Italiano</option>
+        </select>
+    </div>
     
     <nav>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#perfil">Perfil</a></li>
-            <li><a href="#educacion">Educación</a></li>
-            <li><a href="#experiencia">Experiencia</a></li>
-            <li><a href="#habilidades">Habilidades</a></li>
-            <li><a href="#capacitacion">Capacitación</a></li>
+        <ul id="navMenu">
+            <li><a href="#inicio" data-es="Inicio" data-en="Home" data-de="Startseite" data-fr="Accueil" data-pt="Início" data-it="Home">Inicio</a></li>
+            <li><a href="#perfil" data-es="Perfil" data-en="Profile" data-de="Profil" data-fr="Profil" data-pt="Perfil" data-it="Profilo">Perfil</a></li>
+            <li><a href="#educacion" data-es="Educación" data-en="Education" data-de="Bildung" data-fr="Éducation" data-pt="Educação" data-it="Istruzione">Educación</a></li>
+            <li><a href="#experiencia" data-es="Experiencia" data-en="Experience" data-de="Erfahrung" data-fr="Expérience" data-pt="Experiência" data-it="Esperienza">Experiencia</a></li>
+            <li><a href="#habilidades" data-es="Habilidades" data-en="Skills" data-de="Fähigkeiten" data-fr="Compétences" data-pt="Habilidades" data-it="Competenze">Habilidades</a></li>
+            <li><a href="#capacitacion" data-es="Capacitación" data-en="Training" data-de="Schulung" data-fr="Formation" data-pt="Formação" data-it="Formazione">Capacitación</a></li>
+            <li><a href="#contacto" data-es="Contacto" data-en="Contact" data-de="Kontakt" data-fr="Contact" data-pt="Contato" data-it="Contatto">Contacto</a></li>
         </ul>
     </nav>
 
     <header id="inicio">
         <div class="container hero-content">
+            <div class="avatar-container">
+                <div class="avatar-ring"></div>
+                <div class="avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+            </div>
+
             <h1 class="glitch">DAVID KELVY TOMALA CIMARRA</h1>
             <p class="subtitle">Ingeniero Electromecánico | Especialista en TI & GIS</p>
+            
+            <div class="social-links">
+                <a href="mailto:david.kelvy@outlook.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/davidkelvy" class="social-link" title="LinkedIn" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/KelvyDavid" class="social-link" title="GitHub" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://wa.me/593990511926" class="social-link" title="WhatsApp" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="tel:+593990511926" class="social-link" title="Teléfono" rel="noopener">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+            
             <div>
                 <span class="ai-badge">⚡ Sistemas Eléctricos</span>
                 <span class="ai-badge">🤖 Automatización</span>
                 <span class="ai-badge">🗺️ Sistemas GIS</span>
                 <span class="ai-badge">💻 Tecnología de la Información</span>
             </div>
+
+            <div class="cv-download-section">
+                <div class="cv-download-title">
+                    <i class="fas fa-download"></i>
+                    <span data-es="Descargar CV en:" data-en="Download CV in:" data-de="Lebenslauf herunterladen:" data-fr="Télécharger CV en:" data-pt="Baixar CV em:" data-it="Scarica CV in:">Descargar CV en:</span>
+                </div>
+                <div class="cv-languages">
+                    <a href="#" class="cv-lang-btn" onclick="downloadCV('es')">
+                        <span class="flag-icon">🇪🇸</span>
+                        <span>Español</span>
+                    </a>
+                    <a href="#" class="cv-lang-btn" onclick="downloadCV('en')">
+                        <span class="flag-icon">🇺🇸</span>
+                        <span>English</span>
+                    </a>
+                    <a href="#" class="cv-lang-btn" onclick="downloadCV('de')">
+                        <span class="flag-icon">🇩🇪</span>
+                        <span>Deutsch</span>
+                    </a>
+                    <a href="#" class="cv-lang-btn" onclick="downloadCV('fr')">
+                        <span class="flag-icon">🇫🇷</span>
+                        <span>Français</span>
+                    </a>
+                    <a href="#" class="cv-lang-btn" onclick="downloadCV('pt')">
+                        <span class="flag-icon">🇧🇷</span>
+                        <span>Português</span>
+                    </a>
+                    <a href="#" class="cv-lang-btn" onclick="downloadCV('it')">
+                        <span class="flag-icon">🇮🇹</span>
+                        <span>Italiano</span>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </header>
 
     <div class="container">
-        <section id="perfil">
-            <h2>Perfil Profesional</h2>
-            <p class="profile-text">
-                Ingeniero Electromecánico con experiencia en diseño y construcción de redes de distribución, 
-                así como la implementación de sistemas de información geográfica (SIG). Mi formación técnica 
-                se complementa con estudios en Ingeniería en Tecnologías de la Información, lo que me permite 
-                integrar soluciones innovadoras en la gestión de infraestructuras y sistemas tecnológicos.
-            </p>
-            <p class="profile-text" style="margin-top: 1rem;">
-                Mi perfil profesional se caracteriza por una constante búsqueda de mejora y optimización de 
-                procesos, apoyado en un enfoque proactivo y con pasión por la tecnología. Mi objetivo es 
-                continuar desarrollando habilidades técnicas y de gestión en proyectos multidisciplinarios, 
-                contribuyendo al crecimiento de las organizaciones a través de la implementación de soluciones 
-                eficientes y de alto impacto, mientras amplío mis conocimientos en áreas emergentes de la 
-                ingeniería y la tecnología.
-            </p>
-        </section>
+        <!-- Contenido en Español -->
+        <div id="content-es" class="content-section active">
+            <section id="perfil">
+                <h2>Perfil Profesional</h2>
+                <p class="profile-text">
+                    Ingeniero Electromecánico con experiencia en diseño y construcción de redes de distribución, 
+                    así como la implementación de sistemas de información geográfica (SIG). Mi formación técnica 
+                    se complementa con estudios en Ingeniería en Tecnologías de la Información, lo que me permite 
+                    integrar soluciones innovadoras en la gestión de infraestructuras y sistemas tecnológicos.
+                </p>
+                <p class="profile-text" style="margin-top: 1rem;">
+                    Mi perfil profesional se caracteriza por una constante búsqueda de mejora y optimización de 
+                    procesos, apoyado en un enfoque proactivo y con pasión por la tecnología. Mi objetivo es 
+                    continuar desarrollando habilidades técnicas y de gestión en proyectos multidisciplinarios, 
+                    contribuyendo al crecimiento de las organizaciones a través de la implementación de soluciones 
+                    eficientes y de alto impacto, mientras amplío mis conocimientos en áreas emergentes de la 
+                    ingeniería y la tecnología.
+                </p>
+            </section>
 
-        <section id="educacion">
-            <h2>Educación</h2>
-            <div class="education-item">
-                <h3>Ingeniería Electromecánica</h3>
-                <p><strong>Universidad UTE</strong> | Junio 2019</p>
-                <p>Reg. SENESCYT No. 1032-2019-2094258</p>
-            </div>
-            <div class="education-item">
-                <h3>Ingeniería en Tecnología de la Información</h3>
-                <p><strong>UNEMI</strong> | En Curso</p>
-                <p>Quinto semestre</p>
-            </div>
-            <div class="education-item">
-                <h3>Certificación en Prevención de Riesgos Laborales: Energía Eléctrica</h3>
-                <p><strong>GRUPOGESTIONA S.A.</strong> | Septiembre 2022</p>
-                <p>Reg. SETEC No. MDT-480-CCL-368184</p>
-            </div>
-        </section>
+            <section id="educacion">
+                <h2>Educación</h2>
+                <div class="education-item">
+                    <h3>Ingeniería Electromecánica</h3>
+                    <p><strong>Universidad UTE</strong> | Junio 2019</p>
+                    <p>Reg. SENESCYT No. 1032-2019-2094258</p>
+                </div>
+                <div class="education-item">
+                    <h3>Ingeniería en Tecnología de la Información</h3>
+                    <p><strong>UNEMI</strong> | En Curso</p>
+                    <p>Quinto semestre</p>
+                </div>
+                <div class="education-item">
+                    <h3>Certificación en Prevención de Riesgos Laborales: Energía Eléctrica</h3>
+                    <p><strong>GRUPOGESTIONA S.A.</strong> | Septiembre 2022</p>
+                    <p>Reg. SETEC No. MDT-480-CCL-368184</p>
+                </div>
+            </section>
 
-        <section id="experiencia">
-            <h2>Experiencia Profesional</h2>
-            
-            <div class="experience-item">
-                <h3>Profesional GIS</h3>
-                <p><strong>Villavicencio CE</strong> | Julio 2024 - Presente</p>
-                <ul>
-                    <li>Actualización y Validación de Calidad de Datos de Sistemas de Información Geográfica (SIG)</li>
-                    <li>Automatización de procesos SIG</li>
-                </ul>
-            </div>
+            <section id="experiencia">
+                <h2>Experiencia Profesional</h2>
+                
+                <div class="experience-item">
+                    <h3>Profesional GIS</h3>
+                    <p><strong>Villavicencio CE</strong> | Julio 2024 - Presente</p>
+                    <ul>
+                        <li>Actualización y Validación de Calidad de Datos de Sistemas de Información Geográfica (SIG)</li>
+                        <li>Automatización de procesos SIG</li>
+                    </ul>
+                </div>
 
-            <div class="experience-item">
-                <h3>Ingeniero Electromecánico</h3>
-                <p><strong>SMART ENERGY</strong> | Junio 2018 - Presente</p>
-                <ul>
-                    <li>Administración, supervisión e Ingeniería de proyectos eléctricos (Redes de Distribución)</li>
-                    <li>Ingeniería de proyectos de control y automatización</li>
-                    <li>Actualización y Validación de Calidad de Datos de Sistemas de Información Geográfica (SIG)</li>
-                    <li>Automatización de procesos SIG</li>
-                </ul>
-            </div>
+                <div class="experience-item">
+                    <h3>Ingeniero Electromecánico</h3>
+                    <p><strong>SMART ENERGY</strong> | Junio 2018 - Presente</p>
+                    <ul>
+                        <li>Administración, supervisión e Ingeniería de proyectos eléctricos (Redes de Distribución)</li>
+                        <li>Ingeniería de proyectos de control y automatización</li>
+                        <li>Actualización y Validación de Calidad de Datos de Sistemas de Información Geográfica (SIG)</li>
+                        <li>Automatización de procesos SIG</li>
+                    </ul>
+                </div>
 
-            <div class="experience-item">
-                <h3>Profesional GIS</h3>
-                <p><strong>BLUE LINE ENERGY</strong> | Octubre 2019 - Septiembre 2021</p>
-                <ul>
-                    <li>Actualización de Sistemas de Información Geográfica (SIG)</li>
-                    <li>Elaboración de mapas temáticos</li>
-                </ul>
-            </div>
+                <div class="experience-item">
+                    <h3>Profesional GIS</h3>
+                    <p><strong>BLUE LINE ENERGY</strong> | Octubre 2019 - Septiembre 2021</p>
+                    <ul>
+                        <li>Actualización de Sistemas de Información Geográfica (SIG)</li>
+                        <li>Elaboración de mapas temáticos</li>
+                    </ul>
+                </div>
 
-            <div class="experience-item">
-                <h3>Asistente/Digitador</h3>
-                <p><strong>INSELECTRIC</strong> | Julio 2017 - Febrero 2018</p>
-                <ul>
-                    <li>Ingeniería de proyectos eléctricos (Redes de Distribución)</li>
-                    <li>Levantamiento de información para proyectos eléctricos</li>
-                </ul>
-            </div>
+                <div class="experience-item">
+                    <h3>Asistente/Digitador</h3>
+                    <p><strong>INSELECTRIC</strong> | Julio 2017 - Febrero 2018</p>
+                    <ul>
+                        <li>Ingeniería de proyectos eléctricos (Redes de Distribución)</li>
+                        <li>Levantamiento de información para proyectos eléctricos</li>
+                    </ul>
+                </div>
 
-            <div class="experience-item">
-                <h3>Asistente de Proyectos</h3>
-                <p><strong>SD ENERGÍA</strong> | Abril 2016 - Diciembre 2016</p>
-                <ul>
-                    <li>Ingeniería de proyectos eléctricos (Redes de Distribución Aérea y Subterránea)</li>
-                    <li>Sistemas de medición convencionales y tele-medición</li>
-                </ul>
-            </div>
+                <div class="experience-item">
+                    <h3>Asistente de Proyectos</h3>
+                    <p><strong>SD ENERGÍA</strong> | Abril 2016 - Diciembre 2016</p>
+                    <ul>
+                        <li>Ingeniería de proyectos eléctricos (Redes de Distribución Aérea y Subterránea)</li>
+                        <li>Sistemas de medición convencionales y tele-medición</li>
+                    </ul>
+                </div>
 
-            <div class="experience-item">
-                <h3>Técnico Electromecánico</h3>
-                <p><strong>R ELECTRIC</strong> | Agosto 2014 - Marzo 2017</p>
-                <ul>
-                    <li>Ingeniería de proyectos de control y automatización</li>
-                    <li>Ingeniería de proyectos eléctricos</li>
-                </ul>
-            </div>
-        </section>
+                <div class="experience-item">
+                    <h3>Técnico Electromecánico</h3>
+                    <p><strong>R ELECTRIC</strong> | Agosto 2014 - Marzo 2017</p>
+                    <ul>
+                        <li>Ingeniería de proyectos de control y automatización</li>
+                        <li>Ingeniería de proyectos eléctricos</li>
+                    </ul>
+                </div>
+            </section>
 
-        <section id="habilidades">
-            <h2>Aptitudes y Habilidades</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h4>💻 Software & Tecnología</h4>
-                    <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+            <section id="habilidades">
+                <h2>Aptitudes y Habilidades</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>💻 Software & Tecnología</h4>
+                        <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔌 Ingeniería Eléctrica</h4>
+                        <p>Redes de distribución, Diseño de iluminación, Prevención de riesgos eléctricos</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🗺️ Sistemas GIS</h4>
+                        <p>Información geográfica, Administración de base de datos, Mapas temáticos</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🤖 Automatización</h4>
+                        <p>Programación HMI, PLC, Variadores, Control industrial, Domótica</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>👨‍💻 Programación</h4>
+                        <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>📊 Gestión</h4>
+                        <p>Proyectos electromecánicos, Mantenimiento industrial, Liderazgo, Trabajo en equipo</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🌐 Idiomas</h4>
+                        <p>Español (Nativo), Inglés</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔧 Análisis</h4>
+                        <p>Resolución de problemas, Optimización de procesos</p>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <h4>🔌 Ingeniería Eléctrica</h4>
-                    <p>Redes de distribución, Diseño de iluminación, Prevención de riesgos eléctricos</p>
-                </div>
-                <div class="skill-card">
-                    <h4>🗺️ Sistemas GIS</h4>
-                    <p>Información geográfica, Administración de base de datos, Mapas temáticos</p>
-                </div>
-                <div class="skill-card">
-                    <h4>🤖 Automatización</h4>
-                    <p>Programación HMI, PLC, Variadores, Control industrial, Domótica</p>
-                </div>
-                <div class="skill-card">
-                    <h4>👨‍💻 Programación</h4>
-                    <p>Python, SQL, Java, CAD/CAM/CAE</p>
-                </div>
-                <div class="skill-card">
-                    <h4>📊 Gestión</h4>
-                    <p>Proyectos electromecánicos, Mantenimiento industrial, Liderazgo, Trabajo en equipo</p>
-                </div>
-                <div class="skill-card">
-                    <h4>🌐 Idiomas</h4>
-                    <p>Español (Nativo), Inglés</p>
-                </div>
-                <div class="skill-card">
-                    <h4>🔧 Análisis</h4>
-                    <p>Resolución de problemas, Optimización de procesos</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="capacitacion">
-            <h2>Capacitación Continua</h2>
-            <div class="training-grid">
-                <div class="training-item">
-                    <strong>Programación de Pantallas HMI-KINCO</strong>
-                    <p>Octubre 2022 | 40 horas</p>
+            <section id="capacitacion">
+                <h2>Capacitación Continua</h2>
+                <div class="training-grid">
+                    <div class="training-item">
+                        <strong>Programación de Pantallas HMI-KINCO</strong>
+                        <p>Octubre 2022 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Control Eléctrico y Automatización Industrial</strong>
+                        <p>Noviembre 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Compras Públicas Dirigido a Proveedores</strong>
+                        <p>Septiembre 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Sistemas de Información Geográfica y el Uso de ArcGIS</strong>
+                        <p>Abril 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Gestión del Mantenimiento Industrial</strong>
+                        <p>Marzo 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Prevención de Riesgos Eléctricos</strong>
+                        <p>Enero 2018 | 40 horas</p>
+                    </div>
                 </div>
-                <div class="training-item">
-                    <strong>Control Eléctrico y Automatización Industrial</strong>
-                    <p>Noviembre 2018 | 40 horas</p>
+            </section>
+
+            <section id="contacto">
+                <h2>Contacto</h2>
+                <p class="profile-text" style="text-align: center; margin-bottom: 2rem;">
+                    ¿Interesado en colaborar o conocer más sobre mi trabajo? No dudes en contactarme a través de cualquiera de estos medios.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:david.tomala@example.com">david.tomala@example.com</a>
+                        </p>
+                    </div>
+                
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Teléfono</h3>
+                        <p>
+                            <a href="tel:+593999999999">+593 99 999 9999</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p>
+                            <a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener">linkedin.com/in/davidkelvy</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>
+                            <a href="https://github.com/davidtomala" target="_blank">github.com/davidtomala</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p>
+                            <a href="https://wa.me/593999999999" target="_blank">Enviar mensaje</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Ubicación</h3>
+                        <p>Quito, Ecuador</p>
+                    </div>
                 </div>
-                <div class="training-item">
-                    <strong>Compras Públicas Dirigido a Proveedores</strong>
-                    <p>Septiembre 2018 | 40 horas</p>
+            </section>
+        </div>
+
+        <!-- Content in English -->
+        <div id="content-en" class="content-section">
+            <section id="perfil">
+                <h2>Professional Profile</h2>
+                <p class="profile-text">
+                    Electromechanical Engineer with experience in the design and construction of distribution networks,
+                    as well as the implementation of Geographic Information Systems (GIS). My technical background
+                    is complemented by studies in Information Technology Engineering, which allows me to integrate
+                    innovative solutions in the management of infrastructures and technological systems.
+                </p>
+                <p class="profile-text" style="margin-top: 1rem;">
+                    My professional profile is characterized by a constant pursuit of improvement and process optimization,
+                    supported by a proactive approach and a passion for technology. My goal is to continue developing
+                    technical and management skills in multidisciplinary projects, contributing to organizational growth
+                    through the implementation of efficient and high-impact solutions, while expanding my knowledge in
+                    emerging areas of engineering and technology.
+                </p>
+            </section>
+
+            <section id="educacion">
+                <h2>Education</h2>
+                <div class="education-item">
+                    <h3>Electromechanical Engineering</h3>
+                    <p><strong>Universidad UTE</strong> | June 2019</p>
+                    <p>Reg. SENESCYT No. 1032-2019-2094258</p>
                 </div>
-                <div class="training-item">
-                    <strong>Sistemas de Información Geográfica y el Uso de ArcGIS</strong>
-                    <p>Abril 2018 | 40 horas</p>
+                <div class="education-item">
+                    <h3>Information Technology Engineering</h3>
+                    <p><strong>UNEMI</strong> | In Progress</p>
+                    <p>Fifth semester</p>
                 </div>
-                <div class="training-item">
-                    <strong>Gestión del Mantenimiento Industrial</strong>
-                    <p>Marzo 2018 | 40 horas</p>
+                <div class="education-item">
+                    <h3>Certification in Occupational Risk Prevention: Electrical Energy</h3>
+                    <p><strong>GRUPOGESTIONA S.A.</strong> | September 2022</p>
+                    <p>Reg. SETEC No. MDT-480-CCL-368184</p>
                 </div>
-                <div class="training-item">
-                    <strong>Prevención de Riesgos Eléctricos</strong>
-                    <p>Enero 2018 | 40 horas</p>
+            </section>
+
+            <section id="experiencia">
+                <h2>Professional Experience</h2>
+                <div class="experience-item">
+                    <h3>GIS Professional</h3>
+                    <p><strong>Villavicencio CE</strong> | July 2024 - Present</p>
+                    <ul>
+                        <li>Update and Quality Validation of Geographic Information Systems (GIS) Data</li>
+                        <li>Automation of GIS processes</li>
+                    </ul>
                 </div>
-            </div>
-        </section>
-    </div>
+
+                <div class="experience-item">
+                    <h3>Electromechanical Engineer</h3>
+                    <p><strong>SMART ENERGY</strong> | June 2018 - Present</p>
+                    <ul>
+                        <li>Administration, supervision, and engineering of electrical projects (Distribution Networks)</li>
+                        <li>Engineering of control and automation projects</li>
+                        <li>Update and Quality Validation of GIS Data</li>
+                        <li>GIS process automation</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>GIS Professional</h3>
+                    <p><strong>BLUE LINE ENERGY</strong> | October 2019 - September 2021</p>
+                    <ul>
+                        <li>Update of Geographic Information Systems (GIS)</li>
+                        <li>Development of thematic maps</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistant / Data Entry</h3>
+                    <p><strong>INSELECTRIC</strong> | July 2017 - February 2018</p>
+                    <ul>
+                        <li>Engineering of electrical projects (Distribution Networks)</li>
+                        <li>Field data collection for electrical projects</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Project Assistant</h3>
+                    <p><strong>SD ENERGÍA</strong> | April 2016 - December 2016</p>
+                    <ul>
+                        <li>Engineering of electrical projects (Overhead and Underground Distribution Networks)</li>
+                        <li>Conventional and remote measurement systems</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Electromechanical Technician</h3>
+                    <p><strong>R ELECTRIC</strong> | August 2014 - March 2017</p>
+                    <ul>
+                        <li>Control and automation project engineering</li>
+                        <li>Electrical project engineering</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="habilidades">
+                <h2>Skills and Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>💻 Software & Technology</h4>
+                        <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔌 Electrical Engineering</h4>
+                        <p>Distribution networks, Lighting design, Electrical safety</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🗺️ GIS Systems</h4>
+                        <p>Geographic information, Database management, Thematic mapping</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🤖 Automation</h4>
+                        <p>HMI programming, PLC, Variable drives, Industrial control, Home automation</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>👨‍💻 Programming</h4>
+                        <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>📊 Management</h4>
+                        <p>Electromechanical projects, Industrial maintenance, Leadership, Teamwork</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🌐 Languages</h4>
+                        <p>Spanish (Native), English</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔧 Analysis</h4>
+                        <p>Problem-solving, Process optimization</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="capacitacion">
+                <h2>Continuous Training</h2>
+                <div class="training-grid">
+                    <div class="training-item">
+                        <strong>HMI-KINCO Screen Programming</strong>
+                        <p>October 2022 | 40 hours</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Electrical Control and Industrial Automation</strong>
+                        <p>November 2018 | 40 hours</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Public Procurement for Suppliers</strong>
+                        <p>September 2018 | 40 hours</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Geographic Information Systems and the Use of ArcGIS</strong>
+                        <p>April 2018 | 40 hours</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Industrial Maintenance Management</strong>
+                        <p>March 2018 | 40 hours</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Electrical Risk Prevention</strong>
+                        <p>January 2018 | 40 hours</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacto">
+                <h2>Contact</h2>
+                <p class="profile-text" style="text-align: center; margin-bottom: 2rem;">
+                    Interested in collaborating or learning more about my work? Don’t hesitate to contact me through any of these channels.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:david.tomala@example.com">david.tomala@example.com</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Phone</h3>
+                        <p><a href="tel:+593999999999">+593 99 999 9999</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener">linkedin.com/in/davidkelvy</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p><a href="https://github.com/davidtomala" target="_blank">github.com/davidtomala</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/593999999999" target="_blank">Send message</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Location</h3>
+                        <p>Quito, Ecuador</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Inhalt auf Deutsch -->
+        <div id="content-de" class="content-section">
+            <section id="profil">
+                <h2>Berufsprofil</h2>
+                <p class="profile-text">
+                    Elektromechanischer Ingenieur mit Erfahrung in der Planung und dem Bau von Verteilungsnetzen 
+                    sowie in der Implementierung von Geoinformationssystemen (GIS). Mein technischer Hintergrund 
+                    wird durch ein Studium der Informationstechnologie ergänzt, was es mir ermöglicht, innovative 
+                    Lösungen im Management von Infrastrukturen und technologischen Systemen zu integrieren.
+                </p>
+                <p class="profile-text" style="margin-top: 1rem;">
+                    Mein berufliches Profil zeichnet sich durch ein ständiges Streben nach Verbesserung und 
+                    Prozessoptimierung aus, unterstützt von einer proaktiven Haltung und einer Leidenschaft für 
+                    Technologie. Mein Ziel ist es, meine technischen und Managementfähigkeiten in 
+                    multidisziplinären Projekten weiterzuentwickeln, zum Wachstum von Organisationen durch die 
+                    Umsetzung effizienter und wirkungsvoller Lösungen beizutragen und gleichzeitig mein Wissen in 
+                    aufstrebenden Bereichen der Ingenieurwissenschaften und Technologie zu erweitern.
+                </p>
+            </section>
+
+            <section id="bildung">
+                <h2>Ausbildung</h2>
+                <div class="education-item">
+                    <h3>Elektromechanik-Ingenieurwesen</h3>
+                    <p><strong>Universidad UTE</strong> | Juni 2019</p>
+                    <p>Reg. SENESCYT Nr. 1032-2019-2094258</p>
+                </div>
+                <div class="education-item">
+                    <h3>Ingenieurwesen für Informationstechnologie</h3>
+                    <p><strong>UNEMI</strong> | Laufend</p>
+                    <p>Fünftes Semester</p>
+                </div>
+                <div class="education-item">
+                    <h3>Zertifizierung in Arbeitssicherheitsprävention: Elektrische Energie</h3>
+                    <p><strong>GRUPOGESTIONA S.A.</strong> | September 2022</p>
+                    <p>Reg. SETEC Nr. MDT-480-CCL-368184</p>
+                </div>
+            </section>
+
+            <section id="erfahrung">
+                <h2>Berufserfahrung</h2>
+                <div class="experience-item">
+                    <h3>GIS-Fachkraft</h3>
+                    <p><strong>Villavicencio CE</strong> | Juli 2024 - Gegenwart</p>
+                    <ul>
+                        <li>Aktualisierung und Qualitätsvalidierung von Geoinformationssystem-Daten (GIS)</li>
+                        <li>Automatisierung von GIS-Prozessen</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Elektromechanischer Ingenieur</h3>
+                    <p><strong>SMART ENERGY</strong> | Juni 2018 - Gegenwart</p>
+                    <ul>
+                        <li>Verwaltung, Überwachung und Planung elektrischer Projekte (Verteilungsnetze)</li>
+                        <li>Planung von Steuerungs- und Automatisierungsprojekten</li>
+                        <li>Aktualisierung und Qualitätsprüfung von GIS-Daten</li>
+                        <li>Automatisierung von GIS-Prozessen</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>GIS-Fachkraft</h3>
+                    <p><strong>BLUE LINE ENERGY</strong> | Oktober 2019 - September 2021</p>
+                    <ul>
+                        <li>Aktualisierung von Geoinformationssystemen (GIS)</li>
+                        <li>Erstellung thematischer Karten</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistent / Datenerfassung</h3>
+                    <p><strong>INSELECTRIC</strong> | Juli 2017 - Februar 2018</p>
+                    <ul>
+                        <li>Planung elektrischer Projekte (Verteilungsnetze)</li>
+                        <li>Datenerfassung im Feld für elektrische Projekte</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Projektassistent</h3>
+                    <p><strong>SD ENERGÍA</strong> | April 2016 - Dezember 2016</p>
+                    <ul>
+                        <li>Planung elektrischer Projekte (Freileitungs- und Untergrundverteilung)</li>
+                        <li>Konventionelle und Fernmesssysteme</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Elektromechanischer Techniker</h3>
+                    <p><strong>R ELECTRIC</strong> | August 2014 - März 2017</p>
+                    <ul>
+                        <li>Planung von Steuerungs- und Automatisierungsprojekten</li>
+                        <li>Planung elektrischer Projekte</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="fähigkeiten">
+                <h2>Fähigkeiten und Kompetenzen</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>💻 Software & Technologie</h4>
+                        <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔌 Elektrotechnik</h4>
+                        <p>Verteilungsnetze, Beleuchtungsdesign, Elektrische Sicherheit</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🗺️ GIS-Systeme</h4>
+                        <p>Geoinformation, Datenbankverwaltung, Thematische Kartenerstellung</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🤖 Automatisierung</h4>
+                        <p>HMI-Programmierung, PLC, Frequenzumrichter, Industrielle Steuerung, Hausautomatisierung</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>👨‍💻 Programmierung</h4>
+                        <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>📊 Management</h4>
+                        <p>Elektromechanische Projekte, Industrielle Instandhaltung, Führung, Teamarbeit</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🌐 Sprachen</h4>
+                        <p>Spanisch (Muttersprache), Englisch</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔧 Analyse</h4>
+                        <p>Problemlösung, Prozessoptimierung</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="weiterbildung">
+                <h2>Fort- und Weiterbildung</h2>
+                <div class="training-grid">
+                    <div class="training-item">
+                        <strong>HMI-KINCO-Bildschirmprogrammierung</strong>
+                        <p>Oktober 2022 | 40 Stunden</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Elektrische Steuerung und industrielle Automatisierung</strong>
+                        <p>November 2018 | 40 Stunden</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Öffentliche Auftragsvergabe für Lieferanten</strong>
+                        <p>September 2018 | 40 Stunden</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Geoinformationssysteme und die Nutzung von ArcGIS</strong>
+                        <p>April 2018 | 40 Stunden</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Industrielles Instandhaltungsmanagement</strong>
+                        <p>März 2018 | 40 Stunden</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Prävention elektrischer Risiken</strong>
+                        <p>Januar 2018 | 40 Stunden</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="kontakt">
+                <h2>Kontakt</h2>
+                <p class="profile-text" style="text-align: center; margin-bottom: 2rem;">
+                    Interessiert an einer Zusammenarbeit oder möchten Sie mehr über meine Arbeit erfahren? 
+                    Zögern Sie nicht, mich über einen der folgenden Kanäle zu kontaktieren.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>E-Mail</h3>
+                        <p><a href="mailto:david.tomala@example.com">david.tomala@example.com</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Telefon</h3>
+                        <p><a href="tel:+593999999999">+593 99 999 9999</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener">linkedin.com/in/davidkelvy</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p><a href="https://github.com/davidtomala" target="_blank">github.com/davidtomala</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/593999999999" target="_blank">Nachricht senden</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Standort</h3>
+                        <p>Quito, Ecuador</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contenu en Français -->
+        <div id="content-fr" class="content-section">
+            <section id="profil">
+                <h2>Profil Professionnel</h2>
+                <p class="profile-text">
+                    Ingénieur électromécanique avec une expérience dans la conception et la construction de réseaux de distribution,
+                    ainsi que dans la mise en œuvre de systèmes d'information géographique (SIG). Ma formation technique
+                    est complétée par des études en ingénierie des technologies de l'information, ce qui me permet d'intégrer
+                    des solutions innovantes dans la gestion des infrastructures et des systèmes technologiques.
+                </p>
+                <p class="profile-text" style="margin-top: 1rem;">
+                    Mon profil professionnel se caractérise par une recherche constante d'amélioration et d'optimisation des processus,
+                    soutenue par une approche proactive et une passion pour la technologie. Mon objectif est de continuer à développer
+                    mes compétences techniques et managériales dans des projets multidisciplinaires, en contribuant à la croissance
+                    des organisations grâce à la mise en œuvre de solutions efficaces et à fort impact, tout en élargissant mes connaissances
+                    dans les domaines émergents de l'ingénierie et de la technologie.
+                </p>
+            </section>
+
+            <section id="education">
+                <h2>Formation</h2>
+                <div class="education-item">
+                    <h3>Ingénierie Électromécanique</h3>
+                    <p><strong>Université UTE</strong> | Juin 2019</p>
+                    <p>Reg. SENESCYT No. 1032-2019-2094258</p>
+                </div>
+                <div class="education-item">
+                    <h3>Ingénierie en Technologies de l'Information</h3>
+                    <p><strong>UNEMI</strong> | En cours</p>
+                    <p>Cinquième semestre</p>
+                </div>
+                <div class="education-item">
+                    <h3>Certification en Prévention des Risques Professionnels : Énergie Électrique</h3>
+                    <p><strong>GRUPOGESTIONA S.A.</strong> | Septembre 2022</p>
+                    <p>Reg. SETEC No. MDT-480-CCL-368184</p>
+                </div>
+            </section>
+
+            <section id="experience">
+                <h2>Expérience Professionnelle</h2>
+                <div class="experience-item">
+                    <h3>Professionnel SIG</h3>
+                    <p><strong>Villavicencio CE</strong> | Juillet 2024 - Présent</p>
+                    <ul>
+                        <li>Mise à jour et validation de la qualité des données des systèmes d'information géographique (SIG)</li>
+                        <li>Automatisation des processus SIG</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Ingénieur Électromécanique</h3>
+                    <p><strong>SMART ENERGY</strong> | Juin 2018 - Présent</p>
+                    <ul>
+                        <li>Gestion, supervision et ingénierie de projets électriques (réseaux de distribution)</li>
+                        <li>Ingénierie de projets de contrôle et d'automatisation</li>
+                        <li>Mise à jour et validation de la qualité des données SIG</li>
+                        <li>Automatisation des processus SIG</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Professionnel SIG</h3>
+                    <p><strong>BLUE LINE ENERGY</strong> | Octobre 2019 - Septembre 2021</p>
+                    <ul>
+                        <li>Mise à jour des systèmes d'information géographique (SIG)</li>
+                        <li>Développement de cartes thématiques</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistant / Saisie de Données</h3>
+                    <p><strong>INSELECTRIC</strong> | Juillet 2017 - Février 2018</p>
+                    <ul>
+                        <li>Ingénierie de projets électriques (réseaux de distribution)</li>
+                        <li>Collecte de données sur le terrain pour les projets électriques</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistant de Projet</h3>
+                    <p><strong>SD ÉNERGIE</strong> | Avril 2016 - Décembre 2016</p>
+                    <ul>
+                        <li>Ingénierie de projets électriques (réseaux de distribution aériens et souterrains)</li>
+                        <li>Systèmes de mesure conventionnels et à distance</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Technicien Électromécanique</h3>
+                    <p><strong>R ELECTRIC</strong> | Août 2014 - Mars 2017</p>
+                    <ul>
+                        <li>Ingénierie de projets de contrôle et d'automatisation</li>
+                        <li>Ingénierie de projets électriques</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="competences">
+                <h2>Compétences et Aptitudes</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>💻 Logiciels et Technologies</h4>
+                        <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔌 Ingénierie Électrique</h4>
+                        <p>Réseaux de distribution, Conception d'éclairage, Sécurité électrique</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🗺️ Systèmes SIG</h4>
+                        <p>Information géographique, Gestion de bases de données, Cartographie thématique</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🤖 Automatisation</h4>
+                        <p>Programmation HMI, PLC, Variateurs, Contrôle industriel, Domotique</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>👨‍💻 Programmation</h4>
+                        <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>📊 Gestion</h4>
+                        <p>Projets électromécaniques, Maintenance industrielle, Leadership, Travail d'équipe</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🌐 Langues</h4>
+                        <p>Espagnol (natif), Anglais</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔧 Analyse</h4>
+                        <p>Résolution de problèmes, Optimisation des processus</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="formation-continue">
+                <h2>Formation Continue</h2>
+                <div class="training-grid">
+                    <div class="training-item">
+                        <strong>Programmation d'Écrans HMI-KINCO</strong>
+                        <p>Octobre 2022 | 40 heures</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Contrôle Électrique et Automatisation Industrielle</strong>
+                        <p>Novembre 2018 | 40 heures</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Achat Public pour Fournisseurs</strong>
+                        <p>Septembre 2018 | 40 heures</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Systèmes d'Information Géographique et Utilisation d'ArcGIS</strong>
+                        <p>Avril 2018 | 40 heures</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Gestion de la Maintenance Industrielle</strong>
+                        <p>Mars 2018 | 40 heures</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Prévention des Risques Électriques</strong>
+                        <p>Janvier 2018 | 40 heures</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact</h2>
+                <p class="profile-text" style="text-align: center; margin-bottom: 2rem;">
+                    Intéressé à collaborer ou à en savoir plus sur mon travail ? N'hésitez pas à me contacter par l'un de ces moyens.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:david.tomala@example.com">david.tomala@example.com</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:+593999999999">+593 99 999 9999</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener">linkedin.com/in/davidkelvy</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p><a href="https://github.com/davidtomala" target="_blank">github.com/davidtomala</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/593999999999" target="_blank">Envoyer un message</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Localisation</h3>
+                        <p>Quito, Équateur</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contenuto in Italiano -->
+        <div id="content-it" class="content-section">
+            <section id="profilo">
+                <h2>Profilo Professionale</h2>
+                <p class="profile-text">
+                    Ingegnere elettromeccanico con esperienza nella progettazione e costruzione di reti di distribuzione,
+                    nonché nell'implementazione di sistemi informativi geografici (GIS). La mia formazione tecnica
+                    è completata da studi in ingegneria delle tecnologie dell'informazione, che mi permettono di integrare
+                    soluzioni innovative nella gestione delle infrastrutture e dei sistemi tecnologici.
+                </p>
+                <p class="profile-text" style="margin-top: 1rem;">
+                    Il mio profilo professionale si distingue per una costante ricerca di miglioramento e ottimizzazione dei processi,
+                    supportata da un approccio proattivo e da una passione per la tecnologia. Il mio obiettivo è continuare a sviluppare
+                    competenze tecniche e gestionali in progetti multidisciplinari, contribuendo alla crescita delle organizzazioni
+                    attraverso l'implementazione di soluzioni efficienti e ad alto impatto, ampliando al contempo le mie conoscenze
+                    nei settori emergenti dell'ingegneria e della tecnologia.
+                </p>
+            </section>
+
+            <section id="formazione">
+                <h2>Formazione</h2>
+                <div class="education-item">
+                    <h3>Ingegneria Elettromeccanica</h3>
+                    <p><strong>Università UTE</strong> | Giugno 2019</p>
+                    <p>Reg. SENESCYT No. 1032-2019-2094258</p>
+                </div>
+                <div class="education-item">
+                    <h3>Ingegneria in Tecnologie dell'Informazione</h3>
+                    <p><strong>UNEMI</strong> | In Corso</p>
+                    <p>Quinto semestre</p>
+                </div>
+                <div class="education-item">
+                    <h3>Certificazione in Prevenzione dei Rischi Professionali: Energia Elettrica</h3>
+                    <p><strong>GRUPOGESTIONA S.A.</strong> | Settembre 2022</p>
+                    <p>Reg. SETEC No. MDT-480-CCL-368184</p>
+                </div>
+            </section>
+
+            <section id="esperienza">
+                <h2>Esperienza Professionale</h2>
+                <div class="experience-item">
+                    <h3>Professionista GIS</h3>
+                    <p><strong>Villavicencio CE</strong> | Luglio 2024 - Presente</p>
+                    <ul>
+                        <li>Aggiornamento e validazione della qualità dei dati dei sistemi informativi geografici (GIS)</li>
+                        <li>Automazione dei processi GIS</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Ingegnere Elettromeccanico</h3>
+                    <p><strong>SMART ENERGY</strong> | Giugno 2018 - Presente</p>
+                    <ul>
+                        <li>Gestione, supervisione e ingegneria di progetti elettrici (reti di distribuzione)</li>
+                        <li>Ingegneria di progetti di controllo e automazione</li>
+                        <li>Aggiornamento e validazione dei dati GIS</li>
+                        <li>Automazione dei processi GIS</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Professionista GIS</h3>
+                    <p><strong>BLUE LINE ENERGY</strong> | Ottobre 2019 - Settembre 2021</p>
+                    <ul>
+                        <li>Aggiornamento dei sistemi informativi geografici (GIS)</li>
+                        <li>Sviluppo di mappe tematiche</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistente / Inserimento Dati</h3>
+                    <p><strong>INSELECTRIC</strong> | Luglio 2017 - Febbraio 2018</p>
+                    <ul>
+                        <li>Ingegneria di progetti elettrici (reti di distribuzione)</li>
+                        <li>Raccolta di dati sul campo per progetti elettrici</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistente di Progetto</h3>
+                    <p><strong>SD ENERGÍA</strong> | Aprile 2016 - Dicembre 2016</p>
+                    <ul>
+                        <li>Ingegneria di progetti elettrici (reti di distribuzione aeree e sotterranee)</li>
+                        <li>Sistemi di misurazione convenzionali e remoti</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Tecnico Elettromeccanico</h3>
+                    <p><strong>R ELECTRIC</strong> | Agosto 2014 - Marzo 2017</p>
+                    <ul>
+                        <li>Ingegneria di progetti di controllo e automazione</li>
+                        <li>Ingegneria di progetti elettrici</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="competenze">
+                <h2>Competenze e Abilità</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>💻 Software e Tecnologia</h4>
+                        <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔌 Ingegneria Elettrica</h4>
+                        <p>Reti di distribuzione, Progettazione illuminotecnica, Sicurezza elettrica</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🗺️ Sistemi GIS</h4>
+                        <p>Informazioni geografiche, Gestione database, Cartografia tematica</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🤖 Automazione</h4>
+                        <p>Programmazione HMI, PLC, Inverter, Controllo industriale, Domotica</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>👨‍💻 Programmazione</h4>
+                        <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>📊 Gestione</h4>
+                        <p>Progetti elettromeccanici, Manutenzione industriale, Leadership, Lavoro di squadra</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🌐 Lingue</h4>
+                        <p>Spagnolo (madrelingua), Inglese</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔧 Analisi</h4>
+                        <p>Problem solving, Ottimizzazione dei processi</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="formazione-continua">
+                <h2>Formazione Continua</h2>
+                <div class="training-grid">
+                    <div class="training-item">
+                        <strong>Programmazione di Schermi HMI-KINCO</strong>
+                        <p>Ottobre 2022 | 40 ore</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Controllo Elettrico e Automazione Industriale</strong>
+                        <p>Novembre 2018 | 40 ore</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Appalti Pubblici per Fornitori</strong>
+                        <p>Settembre 2018 | 40 ore</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Sistemi Informativi Geografici e Utilizzo di ArcGIS</strong>
+                        <p>Aprile 2018 | 40 ore</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Gestione della Manutenzione Industriale</strong>
+                        <p>Marzo 2018 | 40 ore</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Prevenzione dei Rischi Elettrici</strong>
+                        <p>Gennaio 2018 | 40 ore</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contatto">
+                <h2>Contatto</h2>
+                <p class="profile-text" style="text-align: center; margin-bottom: 2rem;">
+                    Sei interessato a collaborare o a saperne di più sul mio lavoro? Non esitare a contattarmi tramite uno di questi canali.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:david.tomala@example.com">david.tomala@example.com</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Telefono</h3>
+                        <p><a href="tel:+593999999999">+593 99 999 9999</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener">linkedin.com/in/davidkelvy</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p><a href="https://github.com/davidtomala" target="_blank">github.com/davidtomala</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/593999999999" target="_blank">Invia messaggio</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Posizione</h3>
+                        <p>Quito, Ecuador</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Conteúdo em Português -->
+        <div id="content-pt" class="content-section">
+            <section id="perfil">
+                <h2>Perfil Profissional</h2>
+                <p class="profile-text">
+                    Engenheiro Eletromecânico com experiência no design e construção de redes de distribuição,
+                    assim como na implementação de Sistemas de Informação Geográfica (SIG). Minha formação técnica
+                    é complementada por estudos em Engenharia em Tecnologias da Informação, o que me permite integrar
+                    soluções inovadoras na gestão de infraestruturas e sistemas tecnológicos.
+                </p>
+                <p class="profile-text" style="margin-top: 1rem;">
+                    Meu perfil profissional é caracterizado pela busca constante de melhoria e otimização de processos,
+                    apoiado por uma abordagem proativa e paixão por tecnologia. Meu objetivo é continuar desenvolvendo
+                    habilidades técnicas e de gestão em projetos multidisciplinares, contribuindo para o crescimento
+                    das organizações através da implementação de soluções eficientes e de alto impacto, enquanto amplío
+                    meus conhecimentos em áreas emergentes da engenharia e da tecnologia.
+                </p>
+            </section>
+
+            <section id="educacao">
+                <h2>Educação</h2>
+                <div class="education-item">
+                    <h3>Engenharia Eletromecânica</h3>
+                    <p><strong>Universidade UTE</strong> | Junho 2019</p>
+                    <p>Reg. SENESCYT No. 1032-2019-2094258</p>
+                </div>
+                <div class="education-item">
+                    <h3>Engenharia em Tecnologias da Informação</h3>
+                    <p><strong>UNEMI</strong> | Em andamento</p>
+                    <p>Quinto semestre</p>
+                </div>
+                <div class="education-item">
+                    <h3>Certificação em Prevenção de Riscos Laborais: Energia Elétrica</h3>
+                    <p><strong>GRUPOGESTIONA S.A.</strong> | Setembro 2022</p>
+                    <p>Reg. SETEC No. MDT-480-CCL-368184</p>
+                </div>
+            </section>
+
+            <section id="experiencia">
+                <h2>Experiência Profissional</h2>
+                <div class="experience-item">
+                    <h3>Profissional GIS</h3>
+                    <p><strong>Villavicencio CE</strong> | Julho 2024 - Presente</p>
+                    <ul>
+                        <li>Atualização e validação de qualidade de dados de Sistemas de Informação Geográfica (SIG)</li>
+                        <li>Automatização de processos SIG</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Engenheiro Eletromecânico</h3>
+                    <p><strong>SMART ENERGY</strong> | Junho 2018 - Presente</p>
+                    <ul>
+                        <li>Administração, supervisão e engenharia de projetos elétricos (Redes de Distribuição)</li>
+                        <li>Engenharia de projetos de controle e automação</li>
+                        <li>Atualização e validação de qualidade de dados SIG</li>
+                        <li>Automatização de processos SIG</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Profissional GIS</h3>
+                    <p><strong>BLUE LINE ENERGY</strong> | Outubro 2019 - Setembro 2021</p>
+                    <ul>
+                        <li>Atualização de Sistemas de Informação Geográfica (SIG)</li>
+                        <li>Desenvolvimento de mapas temáticos</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistente / Digitador</h3>
+                    <p><strong>INSELECTRIC</strong> | Julho 2017 - Fevereiro 2018</p>
+                    <ul>
+                        <li>Engenharia de projetos elétricos (Redes de Distribuição)</li>
+                        <li>Levantamento de informações para projetos elétricos</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Assistente de Projetos</h3>
+                    <p><strong>SD ENERGÍA</strong> | Abril 2016 - Dezembro 2016</p>
+                    <ul>
+                        <li>Engenharia de projetos elétricos (Redes de Distribuição Aérea e Subterrânea)</li>
+                        <li>Sistemas de medição convencionais e telemedição</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Técnico Eletromecânico</h3>
+                    <p><strong>R ELECTRIC</strong> | Agosto 2014 - Março 2017</p>
+                    <ul>
+                        <li>Engenharia de projetos de controle e automação</li>
+                        <li>Engenharia de projetos elétricos</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="habilidades">
+                <h2>Habilidades e Competências</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>💻 Software & Tecnologia</h4>
+                        <p>MS Office, AutoCAD, CYMDIST, ArcGIS, SCADA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔌 Engenharia Elétrica</h4>
+                        <p>Redes de distribuição, Projeto de iluminação, Segurança elétrica</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🗺️ Sistemas GIS</h4>
+                        <p>Informações geográficas, Gestão de banco de dados, Mapas temáticos</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🤖 Automação</h4>
+                        <p>Programação HMI, PLC, Variadores, Controle industrial, Domótica</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>👨‍💻 Programação</h4>
+                        <p>Python, SQL, Java, CAD/CAM/CAE</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>📊 Gestão</h4>
+                        <p>Projetos eletromecânicos, Manutenção industrial, Liderança, Trabalho em equipe</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🌐 Idiomas</h4>
+                        <p>Espanhol (Nativo), Inglês</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>🔧 Análise</h4>
+                        <p>Resolução de problemas, Otimização de processos</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="capacitacao">
+                <h2>Treinamento Contínuo</h2>
+                <div class="training-grid">
+                    <div class="training-item">
+                        <strong>Programação de Telas HMI-KINCO</strong>
+                        <p>Outubro 2022 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Controle Elétrico e Automação Industrial</strong>
+                        <p>Novembro 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Compras Públicas para Fornecedores</strong>
+                        <p>Setembro 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Sistemas de Informação Geográfica e Uso do ArcGIS</strong>
+                        <p>Abril 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Gestão da Manutenção Industrial</strong>
+                        <p>Março 2018 | 40 horas</p>
+                    </div>
+                    <div class="training-item">
+                        <strong>Prevenção de Riscos Elétricos</strong>
+                        <p>Janeiro 2018 | 40 horas</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contato">
+                <h2>Contato</h2>
+                <p class="profile-text" style="text-align: center; margin-bottom: 2rem;">
+                    Interessado em colaborar ou saber mais sobre meu trabalho? Não hesite em me contatar por qualquer um destes canais.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:david.tomala@example.com">david.tomala@example.com</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Telefone</h3>
+                        <p><a href="tel:+593999999999">+593 99 999 9999</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/davidkelvy" target="_blank" rel="noopener">linkedin.com/in/davidkelvy</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p><a href="https://github.com/davidtomala" target="_blank">github.com/davidtomala</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/593999999999" target="_blank">Enviar mensagem</a></p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Localização</h3>
+                        <p>Quito, Equador</p>
+                    </div>
+                </div>
+            </section>
+        </div>
 
     <footer>
         <p>&copy; 2025 David Kelvy Tomala Cimarra - Ingeniero Electromecánico</p>
@@ -539,5 +1471,77 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const translations = {
+            es: {
+                subtitle: "Ingeniero Electromecánico | Especialista en TI & GIS"
+            },
+            en: {
+                subtitle: "Electromechanical Engineer | IT & GIS Specialist"
+            },
+            de: {
+                subtitle: "Elektromechanischer Ingenieur | IT & GIS Spezialist"
+            },
+            fr: {
+                subtitle: "Ingénieur Électromécanique | Spécialiste IT & SIG"
+            },
+            pt: {
+                subtitle: "Engenheiro Eletromecânico | Especialista em TI & SIG"
+            },
+            it: {
+                subtitle: "Ingegnere Elettromeccanico | Specialista IT & GIS"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            
+            // Ocultar todas las secciones de contenido
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección del idioma seleccionado
+            const contentSection = document.getElementById('content-' + lang);
+            if (contentSection) {
+                contentSection.classList.add('active');
+            }
+            
+            // Actualizar textos traducibles
+            document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+                element.textContent = element.getAttribute('data-' + lang);
+            });
+            
+            // Actualizar subtítulo
+            const subtitle = document.getElementById('subtitle');
+            if (subtitle && translations[lang]) {
+                subtitle.textContent = translations[lang].subtitle;
+            }
+        }
+
+        function downloadCV(language) {
+            const languageNames = {
+                'es': 'Español',
+                'en': 'English',
+                'de': 'Deutsch',
+                'fr': 'Français',
+                'pt': 'Português',
+                'it': 'Italiano'
+            };
+            
+            alert('Descargando CV en ' + languageNames[language] + '...\n\nNota: Aquí conectarías con tus archivos PDF reales del CV en cada idioma.');
+            
+            // En producción, aquí irían los enlaces reales a tus PDFs
+            // window.open('path/to/cv_' + language + '.pdf', '_blank');
+            
+            return false;
+        }
+
+        // Inicializar el idioma por defecto
+        window.addEventListener('DOMContentLoaded', () => {
+            changeLanguage();
+        });
+    </script>
 </body>
 </html>
