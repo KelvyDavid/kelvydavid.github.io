@@ -14,8 +14,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Full Stack Engineer | Scalable E-commerce & GIS Architect",
-  description: "Portfolio of a Senior Full Stack Engineer specializing in PostgreSQL, microservices, and high-performance geospatial infrastructure.",
+  title: "Full Stack Developer | Scalable E-commerce & GIS Architect",
+  description: "Portfolio of a Full Stack Developer specializing in PostgreSQL, microservices, and high-performance geospatial infrastructure.",
 };
 
 export default function RootLayout({
